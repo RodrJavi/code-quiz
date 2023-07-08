@@ -31,7 +31,7 @@ main h1 {
 }
 
 .quiz-intro {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   text-align: center;
@@ -58,5 +58,5 @@ main h1 {
 }
 
 .active-quiz {
-  display: none;
+  display: block;
 }
