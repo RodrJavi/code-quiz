@@ -2,7 +2,7 @@ let quizStartButton = document.querySelector("#quiz-start-button");
 let debugButton = document.querySelector("#debug-button");
 
 function startQuiz() {
-  let timerCount = 10;
+  let timerCount = 100;
   let screenTimer = document.querySelector("#quiz-timer");
   let quizQuestion = document.querySelector("#quiz-question");
   let answerList = document.querySelector("#answer-list").children;
@@ -11,6 +11,16 @@ function startQuiz() {
     Question: "This is the question in firstQuestion",
     answers: ["First answer", "Second answer", "Third answer", "Fourth answer"],
     values: [false, true, false, false],
+  };
+  let secondQuestion = {
+    Question: "This is the question in secondQuestion",
+    answers: [
+      "First answer(2)",
+      "Second answer(2)",
+      "Third answer(2)",
+      "Fourth answer(2)",
+    ],
+    values: [false, false, false, true],
   };
 
   screenTimer.textContent = "Time: " + timerCount;
@@ -30,27 +40,32 @@ function startQuiz() {
   // document.querySelector(".quiz-intro").style.display = "none";
   // document.querySelector(".active-quiz").style.display = "block";
 
-  for (let i = 0; i < firstQuestion.answers.length; i++) {
-    answerList[i].textContent = firstQuestion.answers[i];
-    answerList[i].addEventListener("click", () => {
-      console.log("Click on " + i);
-      chosenAnswer = firstQuestion.values[i];
-      console.log(chosenAnswer);
-      result(chosenAnswer);
-    });
-  }
-
-  function result(res) {
-    console.log("Result is " + res);
-    console.log(typeof chosenAnswer);
-    if (res) {
-      console.log("You're right!");
-    } else {
-      console.log("You're wrong AF!");
+  // Changes HTML to show current questions and adds event listeners to answers that provid a true or false boolean
+  function renderQuestion(currentQuestion) {
+    quizQuestion.textContent = currentQuestion.Question;
+    for (let i = 0; i < currentQuestion.answers.length; i++) {
+      answerList[i].textContent = currentQuestion.answers[i];
+      answerList[i].addEventListener("click", () => {
+        console.log("Click on " + i);
+        chosenAnswer = currentQuestion.values[i];
+        console.log(chosenAnswer);
+        result(chosenAnswer);
+      });
     }
   }
 
-  quizQuestion.textContent = firstQuestion.Question;
+  renderQuestion(secondQuestion);
+
+  function result(response) {
+    if (response) {
+      console.log("No penalty!");
+    } else {
+      console.log("You're wrong! Minus 10 seconds!");
+      timerCount = timerCount - 10;
+    }
+    document.querySelector("#result").textContent = response;
+  }
+
   console.log(firstQuestion);
 }
 
