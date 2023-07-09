@@ -1,5 +1,4 @@
-let quizStartButton = document.querySelector("#quiz-start-button");
-let debugButton = document.querySelector("#debug-button");
+const quizStartButton = document.querySelector("#quiz-start-button");
 const screenTimer = document.querySelector("#quiz-timer");
 const quizQuestion = document.querySelector("#quiz-question");
 const answerList = document.querySelector("#answer-list").children;
@@ -63,7 +62,6 @@ const question6 = {
 function startQuiz() {
   let timerCount = 1000;
   let newScore;
-  let isFinished = false;
   let activeQuestion;
 
   // Switches intro to active quiz
