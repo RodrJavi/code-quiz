@@ -9,8 +9,23 @@ header {
   font-size: 30px;
 }
 
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 li {
+  display: flex;
+  align-items: center;
   list-style-type: none;
+  width: 30%;
+  height: 40px;
+  font-size: 30px;
+  background-color: tomato;
+  color: white;
+  text-shadow: 1px 1px black;
+  border-radius: 4px;
 }
 
 main {
@@ -31,7 +46,7 @@ main h1 {
 }
 
 .quiz-intro {
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
@@ -57,6 +72,29 @@ main h1 {
   box-shadow: 0px 0px 10px tomato;
 }
 
+.quiz-timer {
+  display: none;
+}
+
 .active-quiz {
-  display: block;
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-question {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.result {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.correct {
+  color: rgb(2, 184, 2);
+}
+
+.incorrect {
+  color:red;
 }
