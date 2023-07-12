@@ -91,6 +91,7 @@ function startQuiz() {
 
   // Changes HTML to show current questions
   function renderQuestion(currentQuestion) {
+    activeQuestion = currentQuestion;
     quizQuestion.textContent = currentQuestion.Question;
     for (let i = 0; i < currentQuestion.answers.length; i++) {
       answerList[i].textContent = currentQuestion.answers[i];
@@ -113,23 +114,18 @@ function startQuiz() {
     switch (currentQ) {
       case question1:
         renderQuestion(question2);
-        activeQuestion = question2;
         break;
       case question2:
         renderQuestion(question3);
-        activeQuestion = question3;
         break;
       case question3:
         renderQuestion(question4);
-        activeQuestion = question4;
         break;
       case question4:
         renderQuestion(question5);
-        activeQuestion = question5;
         break;
       case question5:
         renderQuestion(question6);
-        activeQuestion = question6;
         break;
       case question6:
         isFinished = true;
@@ -139,16 +135,31 @@ function startQuiz() {
   }
 
   function showScore() {
+    let userName;
+    highScores = JSON.parse(localStorage.getItem("scoreRecord"));
     screenTimer.textContent = "Time: Done!";
     clearInterval(timer);
-    console.log(timerCount);
     newScore = timerCount;
     scoreDisplay.textContent = newScore;
-    document.querySelector(".active-quiz").style.display = "none";
+    document.querySelector("#active-quiz").style.display = "none";
+    document.querySelector("#quiz-results").style.display = "flex";
+    document.querySelector("#scoreInput").addEventListener("submit", (e) => {
+      e.preventDefault();
+      userName = document.querySelector("#nameInput").value;
+      if (!highScores) {
+        highScores = {
+          name: [],
+          score: [],
+        };
+      }
+      highScores.name.push(userName);
+      highScores.score.push(newScore);
+      localStorage.setItem("scoreRecord", JSON.stringify(highScores));
+      console.log(highScores);
+    });
   }
 
-  renderQuestion(question1);
-  activeQuestion = question1;
+  renderQuestion(question6);
 }
 
 quizStartButton.addEventListener("click", startQuiz);
