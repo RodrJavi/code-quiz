@@ -59,6 +59,23 @@ const question6 = {
   correctAnswer: 3,
 };
 
+
+function showHighScores {
+  document.querySelector(".quiz-intro").style.display = "none";
+  document.querySelector(".active-quiz").style.display = "none";
+  document.querySelector(".quiz-results").style.display = "none";
+  document.querySelector('.score-table').style.display = "flex";
+
+  let scoreList = JSON.parse(localStorage.getItem("scoreRecord"));
+
+  // for (let i = 0; i < scoreList.name.length; i++) {
+
+  // }
+
+}
+
+document.querySelector("#scoreViewer").addEventListener("click", showHighScores);
+
 function startQuiz() {
   let timerCount = 1000;
   let newScore;

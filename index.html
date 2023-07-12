@@ -7,7 +7,7 @@
   </head>
   <body>
     <header>
-      <span>View high scores</span>
+      <span id="scoreViewer">View high scores</span>
       <span id="quiz-timer" class="quiz-timer">Time: 39</span>
     </header>
     <main>
@@ -36,7 +36,7 @@
         <!-- <button id="debug-button">FOR TESTING</button> -->
       </div>
       <!-- Results -->
-      <div id="quiz-results" class="quiz-results">
+      <div id="quizResults" class="quiz-results">
         <h2>Quiz finished!</h2>
         <span id="score" class="score">Your score: 70</span>
         <form class="score-input" id="scoreInput">
@@ -44,6 +44,11 @@
           <input name="score" type="text" id="nameInput" />
           <button type="submit" id="nameSubmitButton">Submit</button>
         </form>
+      </div>
+      <!-- High scores -->
+      <div class="score-table" id="scoreTable">
+        <ul class="scores-list" id="nameList"></ul>
+        <ul class="scores-list" id="scoreList"></ul>
       </div>
     </main>
     <script src="./assets/script.js"></script>
