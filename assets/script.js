@@ -71,6 +71,7 @@ function showHighScores() {
   let scoreRecord = JSON.parse(localStorage.getItem("scoreRecord"));
   nameList.innerHTML = "";
   scoreList.innerHTML = "";
+  screenTimer.style.display = "none";
 
   for (let i = 0; i < scoreRecord.name.length; i++) {
     let newLi = document.createElement("li");
@@ -118,7 +119,7 @@ function startQuiz() {
       showScore();
     }
   }, 1000);
-  document.querySelector(".quiz-timer").style.display = "block";
+  screenTimer.style.display = "block";
   screenTimer.textContent = "Time: " + timerCount;
 
   // Adds event listeners to questions
