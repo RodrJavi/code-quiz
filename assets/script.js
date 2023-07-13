@@ -3,6 +3,9 @@ const screenTimer = document.querySelector("#quiz-timer");
 const quizQuestion = document.querySelector("#quiz-question");
 const answerList = document.querySelector("#answer-list").children;
 const scoreDisplay = document.querySelector("#score");
+const nameList = document.querySelector("#nameList");
+const scoreList = document.querySelector("#scoreList");
+let isScoreOpen = false;
 const question1 = {
   Question: "This is the question in firstQuestion",
   answers: ["First answer", "Second answer", "Third answer", "Fourth answer"],
@@ -59,22 +62,43 @@ const question6 = {
   correctAnswer: 3,
 };
 
-
-function showHighScores {
+// empties parent ULs each time when called to allow them to be 'refreshed' when new scores are added to localstorage
+function showHighScores() {
   document.querySelector(".quiz-intro").style.display = "none";
   document.querySelector(".active-quiz").style.display = "none";
   document.querySelector(".quiz-results").style.display = "none";
-  document.querySelector('.score-table').style.display = "flex";
+  document.querySelector(".score-screen").style.display = "flex";
+  let scoreRecord = JSON.parse(localStorage.getItem("scoreRecord"));
+  nameList.innerHTML = "";
+  scoreList.innerHTML = "";
 
-  let scoreList = JSON.parse(localStorage.getItem("scoreRecord"));
+  for (let i = 0; i < scoreRecord.name.length; i++) {
+    let newLi = document.createElement("li");
+    newLi.textContent = scoreRecord.name[i];
+    nameList.appendChild(newLi);
+  }
 
-  // for (let i = 0; i < scoreList.name.length; i++) {
+  for (let i = 0; i < scoreRecord.score.length; i++) {
+    let newLi = document.createElement("li");
+    newLi.textContent = scoreRecord.score[i];
+    scoreList.appendChild(newLi);
+  }
 
-  // }
-
+  if (!isScoreOpen) {
+    isScoreOpen = true;
+    document.querySelector("#scoreViewer").textContent = "Return to quiz start";
+  } else {
+    document.querySelector(".quiz-intro").style.display = "flex";
+    document.querySelector(".score-screen").style.display = "none";
+    isScoreOpen = false;
+    document.querySelector("#scoreViewer").textContent = "View high scores";
+  }
 }
 
-document.querySelector("#scoreViewer").addEventListener("click", showHighScores);
+// On "View high scores" text at top of page to show list of high scores
+document
+  .querySelector("#scoreViewer")
+  .addEventListener("click", showHighScores);
 
 function startQuiz() {
   let timerCount = 1000;
@@ -115,6 +139,7 @@ function startQuiz() {
     }
   }
 
+  // called when answer is picked, determines if it was correct or not and switches to next question
   function answerPick(ans, currentQ) {
     let windowAnswer = document.querySelector("#result");
     if (ans == currentQ.correctAnswer) {
@@ -151,6 +176,7 @@ function startQuiz() {
     }
   }
 
+  // Shows score when quiz has ended, also allows user to input name for score and submit into local storage. Shows high score screen right away
   function showScore() {
     let userName;
     highScores = JSON.parse(localStorage.getItem("scoreRecord"));
@@ -158,8 +184,8 @@ function startQuiz() {
     clearInterval(timer);
     newScore = timerCount;
     scoreDisplay.textContent = newScore;
-    document.querySelector("#active-quiz").style.display = "none";
-    document.querySelector("#quiz-results").style.display = "flex";
+    document.querySelector(".active-quiz").style.display = "none";
+    document.querySelector(".quiz-results").style.display = "flex";
     document.querySelector("#scoreInput").addEventListener("submit", (e) => {
       e.preventDefault();
       userName = document.querySelector("#nameInput").value;
@@ -172,7 +198,7 @@ function startQuiz() {
       highScores.name.push(userName);
       highScores.score.push(newScore);
       localStorage.setItem("scoreRecord", JSON.stringify(highScores));
-      console.log(highScores);
+      showHighScores();
     });
   }
 

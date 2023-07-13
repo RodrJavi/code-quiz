@@ -12,7 +12,7 @@
     </header>
     <main>
       <!-- First screen -->
-      <div id="quiz-intro" class="quiz-intro">
+      <div id="quizIntro" class="quiz-intro">
         <h1>Coding Quiz Challenge</h1>
         <p>
           Try to answer the questions within the time limit! Incorrect answers
@@ -21,7 +21,7 @@
         <button id="quiz-start-button">Start Quiz</button>
       </div>
       <!-- Active quiz taking -->
-      <div id="active-quiz" class="active-quiz">
+      <div id="activeQuiz" class="active-quiz">
         <p id="quiz-question" class="quiz-question">
           This is some random text I am typing in to represent what a question
           would look like during this coding quiz.
@@ -33,7 +33,6 @@
           <li data-number="3">Answer 4</li>
         </ul>
         <span id="result" class="result"></span>
-        <!-- <button id="debug-button">FOR TESTING</button> -->
       </div>
       <!-- Results -->
       <div id="quizResults" class="quiz-results">
@@ -46,9 +45,16 @@
         </form>
       </div>
       <!-- High scores -->
-      <div class="score-table" id="scoreTable">
-        <ul class="scores-list" id="nameList"></ul>
-        <ul class="scores-list" id="scoreList"></ul>
+      <div class="score-screen" id="scoreScreen">
+        <h2>High Scores</h2>
+        <div class="score-table" id="scoreTable">
+          <ul class="scores-list" id="nameList">
+            Name:
+          </ul>
+          <ul class="scores-list" id="scoreList">
+            Score:
+          </ul>
+        </div>
       </div>
     </main>
     <script src="./assets/script.js"></script>
