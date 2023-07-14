@@ -113,7 +113,6 @@ function startQuiz() {
   [...answerList].forEach((answer) => {
     answer.addEventListener("click", (e) => {
       let answer = e.target.getAttribute("data-number");
-      // console.log(answer);
       answerPick(answer, activeQuestion);
     });
   });
@@ -131,11 +130,9 @@ function startQuiz() {
   function answerPick(ans, currentQ) {
     let windowAnswer = document.querySelector("#result");
     if (ans == currentQ.correctAnswer) {
-      console.log("No penalty!");
       windowAnswer.textContent = "Correct!";
       windowAnswer.setAttribute("class", "result correct");
     } else {
-      console.log("You're wrong! Minus 10 seconds!");
       timerCount = timerCount - 10;
       windowAnswer.textContent = "Incorrect";
       windowAnswer.setAttribute("class", "result incorrect");
@@ -183,10 +180,14 @@ function startQuiz() {
           score: [],
         };
       }
-      highScores.name.push(userName);
-      highScores.score.push(newScore);
-      localStorage.setItem("scoreRecord", JSON.stringify(highScores));
-      showHighScores();
+      if (!(userName === "")) {
+        highScores.name.push(userName);
+        highScores.score.push(newScore);
+        localStorage.setItem("scoreRecord", JSON.stringify(highScores));
+        showHighScores();
+      } else {
+        window.alert("Please enter a name");
+      }
     });
   }
 
