@@ -7,58 +7,41 @@ const nameList = document.querySelector("#nameList");
 const scoreList = document.querySelector("#scoreList");
 let isScoreOpen = false;
 const question1 = {
-  Question: "This is the question in firstQuestion",
-  answers: ["First answer", "Second answer", "Third answer", "Fourth answer"],
-  correctAnswer: 1,
+  Question:
+    "Which function is used to serialize an object into a JSON string in Javascript?",
+  answers: ["stringify()", "parse()", "conver()", "None of the above"],
+  correctAnswer: 0,
 };
 const question2 = {
-  Question: "This is the question in secondQuestion",
+  Question: "Javscript is a(n) ______ language",
   answers: [
-    "First answer(2)",
-    "Second answer(2)",
-    "Third answer(2)",
-    "Fourth answer(2)",
-  ],
-  correctAnswer: 3,
-};
-const question3 = {
-  Question: "This is the question in thirdQuestion",
-  answers: [
-    "First answer(3)",
-    "Second answer(3)",
-    "Third answer(3)",
-    "Fourth answer(3)",
+    "Object-Oriented",
+    "Procedural",
+    "Object-Based",
+    "None of the bove",
   ],
   correctAnswer: 0,
 };
+const question3 = {
+  Question:
+    "Which of the following keywords is used to define a variable in Javascript",
+  answers: ["var", "let", "A and B", "None of the above"],
+  correctAnswer: 2,
+};
 const question4 = {
-  Question: "This is the question in fourthQuestion",
-  answers: [
-    "First answer(4)",
-    "Second answer(4)",
-    "Third answer(4)",
-    "Fourth answer(4)",
-  ],
+  Question: "How to stop an interval timer in Javascript?",
+  answers: ["clearTimer", "clearInterval", "intervalOver", "stopTimer"],
   correctAnswer: 1,
 };
 const question5 = {
-  Question: "This is the question in fifthQuestion",
-  answers: [
-    "First answer(5)",
-    "Second answer(5)",
-    "Third answer(5)",
-    "Fourth answer(5)",
-  ],
+  Question: "How do we write a comment in Javascript?",
+  answers: ["$$", "#", "//", "/**/"],
   correctAnswer: 2,
 };
 const question6 = {
-  Question: "This is the question in sixthQuestion",
-  answers: [
-    "First answer(6)",
-    "Second answer(6)",
-    "Third answer(6)",
-    "Fourth answer(6)",
-  ],
+  Question:
+    "Which of the following number object function returns the value of the number?",
+  answers: ["toPrecision()", "toLocaleString()", "toString()", "valueOf()"],
   correctAnswer: 3,
 };
 
@@ -73,16 +56,20 @@ function showHighScores() {
   scoreList.innerHTML = "";
   screenTimer.style.display = "none";
 
-  for (let i = 0; i < scoreRecord.name.length; i++) {
-    let newLi = document.createElement("li");
-    newLi.textContent = scoreRecord.name[i];
-    nameList.appendChild(newLi);
-  }
+  if (!scoreRecord) {
+    nameList.innerHTML = "No scores to display!";
+  } else {
+    for (let i = 0; i < scoreRecord.name.length; i++) {
+      let newLi = document.createElement("li");
+      newLi.textContent = scoreRecord.name[i];
+      nameList.appendChild(newLi);
+    }
 
-  for (let i = 0; i < scoreRecord.score.length; i++) {
-    let newLi = document.createElement("li");
-    newLi.textContent = scoreRecord.score[i];
-    scoreList.appendChild(newLi);
+    for (let i = 0; i < scoreRecord.score.length; i++) {
+      let newLi = document.createElement("li");
+      newLi.textContent = scoreRecord.score[i];
+      scoreList.appendChild(newLi);
+    }
   }
 
   if (!isScoreOpen) {
@@ -102,7 +89,7 @@ document
   .addEventListener("click", showHighScores);
 
 function startQuiz() {
-  let timerCount = 1000;
+  let timerCount = 75;
   let newScore;
   let activeQuestion;
 
@@ -203,7 +190,7 @@ function startQuiz() {
     });
   }
 
-  renderQuestion(question6);
+  renderQuestion(question1);
 }
 
 quizStartButton.addEventListener("click", startQuiz);

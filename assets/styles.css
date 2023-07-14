@@ -28,6 +28,10 @@ ul {
   border-radius: 4px;
 }
 
+#answer-list li:hover {
+  box-shadow: 0px 0px 15px var(--light-tomato);
+}
+
 main {
   padding: 10% 15%;
   display: flex;
